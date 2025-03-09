@@ -11,7 +11,7 @@
                     <li><strong>Role:</strong> {{ $student->role }}</li>
                     <li><strong>Age:</strong> {{ $student->age }}</li>
                     <li><strong>Address:</strong> {{ $student->address }}</li>
-                    <li><strong>Email:</strong> {{ $student->email }}</li>
+                    <li><strong>Emaill:</strong> {{ $student->email }}</li>
                     <li><strong>Phone:</strong> {{ $student->phone }}</li>
                     <li><strong>GitHub Username:</strong> {{ $student->githubuserid }}</li>
                 </ul>
