@@ -17,12 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('skill');
             $table->string('role');
             $table->integer('age');
             $table->text('address');
-            $table->string('phone');
-            $table->string('githubuserid');
+            $table->string('phone')->unique();
+            $table->string('githubuserid')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();

@@ -1,11 +1,14 @@
 @extends('layouts.master')
 @section('content')
 <!-- About Me Subpage -->
+@if(Session::has('student_id'))
+<?php $student = \App\Models\Student::find(Session::get('student_id')); ?>
 <section class="pt-page pt-page-2" data-id="about_me">
     <div class="section-title-block">
       <h2 class="section-title">About Me</h2>
-      <h5 class="section-description">Artist, Thinker, Creative Doer</h5>
+      <h5 class="section-description">{{ $student->role }}</h5>
     </div>
+@endif
 
     <div class="row">
       <div class="col-sm-6 col-md-6 subpage-block">
@@ -124,89 +127,6 @@
     </div>
     <!-- End of Services block -->
 
-    <!-- Clients block -->
-    <div class="block-title">
-      <h3>Clients</h3>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-4 col-md-2 subpage-block">
-        <div class="client_block">
-          <a href="#" target="_blank"><img src="images/clients/client_1.png" alt="image"></a>
-        </div>
-      </div>
-
-      <div class="col-sm-4 col-md-2 subpage-block">
-        <div class="client_block">
-          <a href="#" target="_blank"><img src="images/clients/client_2.png" alt="image"></a>
-        </div>
-      </div>
-
-      <div class="col-sm-4 col-md-2 subpage-block">
-        <div class="client_block">
-          <a href="#" target="_blank"><img src="images/clients/client_3.png" alt="image"></a>
-        </div>
-      </div>
-
-      <div class="col-sm-4 col-md-2 subpage-block">
-        <div class="client_block">
-          <a href="#" target="_blank"><img src="images/clients/client_4.png" alt="image"></a>
-        </div>
-      </div>
-
-      <div class="col-sm-4 col-md-2 subpage-block">
-        <div class="client_block">
-          <a href="#" target="_blank"><img src="images/clients/client_5.png" alt="image"></a>
-        </div>
-      </div>
-
-      <div class="col-sm-4 col-md-2 subpage-block">
-        <div class="client_block">
-          <a href="#" target="_blank"><img src="images/clients/client_6.png" alt="image"></a>
-        </div>
-      </div>
-    </div>
-    <!-- End of Clients block -->
-
-    <!-- Fun facts block -->
-    <div class="block-title">
-      <h3>Fun Facts</h3>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-6 col-md-3 subpage-block">
-        <div class="fun-fact-block gray-bg"> 
-          <i class="pe-7s-icon pe-7s-smile"></i>
-          <h4>Happy Clients</h4>
-          <span class="fun-value">1,024</span>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-3 subpage-block">
-        <div class="fun-fact-block"> 
-          <i class="pe-7s-icon pe-7s-alarm"></i>
-          <h4>Working Hours</h4>
-          <span class="fun-value">6,256</span>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-3 subpage-block">
-        <div class="fun-fact-block gray-bg"> 
-          <i class="pe-7s-icon pe-7s-medal"></i>
-          <h4>Awards Won</h4>
-          <span class="fun-value">21</span>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-3 subpage-block">
-        <div class="fun-fact-block"> 
-          <i class="pe-7s-icon pe-7s-coffee"></i>
-          <h4>Coffee Consumed</h4>
-          <span class="fun-value">20,000</span>
-        </div>
-      </div>
-    </div>
-    <!-- End of Fun fucts block -->
   </section>
   <!-- End of About Me Subpage -->
   @endsection

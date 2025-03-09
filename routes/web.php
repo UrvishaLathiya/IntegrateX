@@ -5,7 +5,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\GitHubController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Auth\StudentRegisterController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SkillController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -14,25 +15,33 @@ Route::get('/home', function () {
 })->middleware('auth');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
-Route::get('/student-register', [StudentRegisterController::class, 'showRegistrationForm'])->name('student.register');
-Route::post('/student-register', [StudentRegisterController::class, 'register'])->name('register');
+// Registration Routes
+Route::get('/register', [RegisterController::class, 'showRegister'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 
 // Home and other pages
 Route::get('/home', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/resume', [PageController::class, 'resume'])->name('resume');
-Route::get('/blog', [PageController::class, 'blog'])->name('blog');
+//Route::get('/skills', [SkillController::class, 'index'])->name('skills');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/github', [GitHubController::class, 'showRepos'])->name('github');
-//Route::get('/myprofile', [GitHubController::class, 'myprofile'])->name('myprofile');
-// Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+
 
 // // Route to update the profile
 // Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
+// Set student ID manually for now (temporary login simulation)
+Route::get('/set-student/{id}', function ($id) {
+    session(['student_id' => $id]); // Store student ID in session
+    return redirect()->route('skills')->with('success', 'Student set successfully!');
+});
+
+Route::get('/skill', [SkillController::class, 'index'])->name('skills');
+Route::post('/skills/save', [SkillController::class, 'save'])->name('skills.save');
 
 
 // Default route redirects to login

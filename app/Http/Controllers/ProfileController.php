@@ -1,21 +1,21 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
     // Show Profile Edit Page
     public function edit()
     {
-        // Check if the session has a student_id
         if (!Session::has('student_id')) {
             return redirect()->route('login')->with('error', 'Please log in first.');
         }
 
-        // Fetch the student based on session ID
         $student = Student::find(Session::get('student_id'));
 
         if (!$student) {
@@ -26,47 +26,53 @@ class ProfileController extends Controller
     }
 
     // Update Profile Data
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         if (!Session::has('student_id')) {
             return redirect()->route('login')->with('error', 'Please log in first.');
         }
-    
-        $student = Student::find(Session::get('student_id'));
-    
-        if (!$student) {
-            return redirect()->route('login')->with('error', 'Student not found.');
+
+        // Ensure the session ID matches the user being updated
+        if (Session::get('student_id') != $id) {
+            return redirect()->route('profile.edit')->with('error', 'Unauthorized access.');
         }
-    
+
+        $student = Student::find($id);
+
+        if (!$student) {
+            return redirect()->route('profile.edit')->with('error', 'Student not found.');
+        }
+
         // Validation
         $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|email|unique:students,email,' . $student->id,
-            'skill' => 'required|string',
             'role' => 'required|string',
             'age' => 'required|integer|min:1',
             'address' => 'required|string',
             'phone' => 'required|string',
             'githubuserid' => 'required|string',
-            'password' => 'nullable|string|min:6|confirmed', // Added confirmation validation
+            'password' => 'nullable|string|min:6',
         ]);
-    
+
         // Update Student Data
-        $student->update([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
-            'skill' => $request->skill,
-            'role' => $request->role,
-            'age' => $request->age,
-            'address' => $request->address,
-            'phone' => $request->phone,
-            'githubuserid' => $request->githubuserid,
-            'password' => $request->password ? bcrypt($request->password) : $student->password, // Hash only if password is entered
-        ]);
-    
+        $student->firstname = $request->firstname;
+        $student->lastname = $request->lastname;
+        $student->email = $request->email;
+        $student->role = $request->role;
+        $student->age = $request->age;
+        $student->address = $request->address;
+        $student->phone = $request->phone;
+        $student->githubuserid = $request->githubuserid;
+
+        // Only update password if a new one is provided
+        if ($request->filled('password')) {
+            $student->password = Hash::make($request->password);
+        }
+
+        $student->save(); // Save updated data
+
         return redirect()->route('profile.edit')->with('success', 'Profile updated successfully!');
     }
-    
 }

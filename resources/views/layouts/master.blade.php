@@ -71,7 +71,7 @@
             <li><a href="/about" >About me</a></li>
             <li><a href="/resume">Resume</a></li>
             <li><a href="/github" data-animation="61" data-goto="4">GitHub</a></li>
-            <li><a href="/blog" data-animation="58" data-goto="5">Blog</a></li>
+            <li><a href="/skill" data-animation="58" data-goto="5">Skill</a></li>
             <li><a href="/contact" data-animation="59" data-goto="6">Contact</a></li>
            <li><a href="/profile">My Profile</a></li>
            
