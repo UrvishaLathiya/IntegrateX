@@ -18,27 +18,26 @@
     
         // Handle login logic
         public function login(Request $request)
-        {
-            $request->validate([
-                'emailid' => 'required|email',
-                'password' => 'required'
-            ]);
-    
-            // Check credentials
-           
-            $student = Student::where('email', $request->emailid)->first();
-    
-            if ($student && password_verify($request->password, $student->password)) {
-                // Store session data
-                Session::put('student_id', $student->id);
-                Session::put('emailid', $student->emailid);
-    
-                return redirect('/home')->with('success', 'Login successful!');
-            }
-    
-            return back()->with('error', 'Invalid email or password');
-        }
-    
+{
+    $request->validate([
+        'emailid' => 'required|email',
+        'password' => 'required'
+    ]);
+
+    $student = Student::where('email', $request->emailid)->first();
+
+    if ($student && password_verify($request->password, $student->password)) {
+        // ✅ Store student_id in session
+        session(['student_id' => $student->id]);
+        Session::put('student_id', $student->id);
+
+        return redirect('/home')->with('success', 'Login successful!');
+    }
+
+    return back()->with('error', 'Invalid email or password');
+}
+
+
         // Logout function
         public function logout()
         {

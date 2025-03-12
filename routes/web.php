@@ -7,6 +7,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\ProjectController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -42,6 +44,19 @@ Route::get('/set-student/{id}', function ($id) {
 
 Route::get('/skill', [SkillController::class, 'index'])->name('skills');
 Route::post('/skills/save', [SkillController::class, 'save'])->name('skills.save');
+
+
+
+// Route to display all certificates
+Route::get('/certificate', [CertificateController::class, 'showAllCertificates'])->name('certificates.index');
+// Route to handle certificate upload
+Route::post('/certificates/upload', [CertificateController::class, 'uploadCertificate'])->name('certificates.upload');
+
+// Show all projects
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+
+
 
 
 // Default route redirects to login

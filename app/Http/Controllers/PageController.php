@@ -12,5 +12,8 @@ class PageController extends Controller
     public function github() { return view('github'); }
     public function blog() { return view('blog'); }
     public function contact() { return view('contact'); }
+    public function projects() { return view('projects'); }
     public function myprofile() { return view('myprofile'); }
+    public function certificate() { return view('certificate'); }
+
 }
