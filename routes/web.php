@@ -7,7 +7,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SkillController;
-use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ProjectController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -25,14 +24,11 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/home', [PageController::class, 'home'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/resume', [PageController::class, 'resume'])->name('resume');
-//Route::get('/skills', [SkillController::class, 'index'])->name('skills');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/github', [GitHubController::class, 'showRepos'])->name('github');
 
 
 // // Route to update the profile
-// Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
-
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
 
@@ -45,19 +41,9 @@ Route::get('/set-student/{id}', function ($id) {
 Route::get('/skill', [SkillController::class, 'index'])->name('skills');
 Route::post('/skills/save', [SkillController::class, 'save'])->name('skills.save');
 
-
-
-// Route to display all certificates
-Route::get('/certificate', [CertificateController::class, 'showAllCertificates'])->name('certificates.index');
-// Route to handle certificate upload
-Route::post('/certificates/upload', [CertificateController::class, 'uploadCertificate'])->name('certificates.upload');
-
 // Show all projects
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
-
-
-
 
 // Default route redirects to login
 Route::get('/', function () {
