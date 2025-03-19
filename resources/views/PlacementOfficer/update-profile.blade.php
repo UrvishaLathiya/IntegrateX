@@ -27,7 +27,9 @@
         <label>Password (Leave blank to keep current password)</label>
         <input type="password" name="password" class="form-control">
 
-        <button type="submit" class="btn btn-primary w-100 mt-3">Update Profile</button>
+        <button type="submit" class="btn btn-primary d-block mx-auto mt-3">Update Profile</button>
+
+
     </form>
 </div>
 @endsection

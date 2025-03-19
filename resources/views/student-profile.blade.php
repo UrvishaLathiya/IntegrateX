@@ -27,20 +27,27 @@
     }
 
     /* Input Fields */
-    .form-control {
-        border-radius: 8px;
-        border: 1px solid #ced4da;
-        padding: 12px;
-        font-size: 16px;
-        transition: all 0.3s ease-in-out;
-        width: 100%;
-    }
+    /* Input Fields */
+/* Input Fields */
+/* Make input fields and text inside the same width */
+.form-control {
+    width: 100% !important; /* Full width */
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 18px; /* Increase text size */
+    height: 50px;
+    letter-spacing: 1px; /* Space out letters */
+    text-align: left; /* Keep text aligned */
+    font-family: Arial, sans-serif;
+}
 
-    .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        outline: none;
-    }
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+
 
     /* Error Message */
     .text-danger {

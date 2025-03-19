@@ -18,7 +18,8 @@
             <form action="{{ route('placement.store-skill') }}" method="POST">
                 @csrf
                 <input type="text" name="name" class="form-control mb-2" placeholder="Enter Skill Name" required>
-                <button type="submit" class="btn btn-success w-100">Add Skill</button>
+                <button type="submit" class="btn btn-success d-block mx-auto mt-2">Add Skill</button>
+
             </form>
         </div>
     </div>
@@ -36,7 +37,8 @@
                     @endforeach
                 </select>
                 <input type="text" name="name" class="form-control mb-2" placeholder="Enter Sub-skill Name" required>
-                <button type="submit" class="btn btn-info w-100">Add Sub-Skill</button>
+                <button type="submit" class="btn btn-info d-block mx-auto mt-2">Add Sub-Skill</button>
+
             </form>
         </div>
     </div>

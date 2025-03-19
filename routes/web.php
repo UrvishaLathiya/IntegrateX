@@ -50,7 +50,7 @@ Route::get('/github', [GitHubController::class, 'showRepos'])->name('github');
 
 
 // // Route to update the profile
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::get('/student-profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
 
 // Set student ID manually for now (temporary login simulation)

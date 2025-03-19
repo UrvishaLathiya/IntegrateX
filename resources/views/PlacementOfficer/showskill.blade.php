@@ -4,9 +4,9 @@
     <div class="container mt-5">
 
         <!-- 📊 Chart Section -->
-        <div class="mb-6">
+        <div class="mb-5 p-4">
             <h2 class="text-center text-primary mb-4">Student Skill Distribution</h2>
-            <div class="card shadow-lg border-0 rounded-lg">
+            <div class="card shadow-lg border-0 rounded-lg p-4">
                 <div class="card-body">
                     <canvas id="skillsChart"></canvas>
                 </div>
@@ -14,9 +14,9 @@
         </div>
 
         <!-- 📋 Student Skills Table -->
-        <div>
+        <div class="mb-5 p-4">
             <h2 class="text-center text-primary mb-4">Student Skill Dashboard</h2>
-            <div class="card shadow-lg border-0 rounded-lg">
+            <div class="card shadow-lg border-0 rounded-lg p-4">
                 <div class="card-body">
                     <table class="table table-striped table-hover text-center">
                         <thead class="table-dark">

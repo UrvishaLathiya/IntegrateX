@@ -22,7 +22,7 @@ class ProfileController extends Controller
             return redirect()->route('login')->with('error', 'Student not found.');
         }
 
-        return view('profile', compact('student'));
+        return view('student-profile', compact('student'));
     }
 
     // Update Profile Data

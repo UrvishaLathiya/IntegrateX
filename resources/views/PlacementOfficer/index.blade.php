@@ -1,17 +1,13 @@
 @extends('PlacementOfficer.layouts.officerMaster')
 
 @section('content')
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-
-    <div class="w-full max-w-4xl bg-white p-8 rounded-lg shadow-md text-center">
-        <h2 class="text-3xl font-semibold">Welcome, {{ session('officer_name') }}</h2>
-        <p class="text-gray-600 mt-2">Your Role: {{ session('role') }}</p>
-        <p class="text-gray-500 mt-2">Email: {{ session('officer_email') }}</p>
-
-        <div class="mt-4">
-            
-
+<div class="d-flex justify-content-center align-items-start mt-5">
+    <div class="card shadow-lg p-4" style="width: 30rem;">
+        <div class="card-body text-center">
+            <h2 class="card-title fw-bold">Welcome, {{ session('officer_name') }}</h2>
+            <p class="text-primary fw-semibold">Your Role: <strong>{{ session('role') }}</strong></p>
+            <p class="text-success fw-semibold">Email: <strong>{{ session('officer_email') }}</strong></p>
         </div>
     </div>
-
+</div>
 @endsection

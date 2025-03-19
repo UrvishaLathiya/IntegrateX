@@ -74,7 +74,7 @@
             <li><a href="/skill" data-animation="58" data-goto="5">Skill</a></li>
             <li><a href="/contact" data-animation="59" data-goto="6">Contact</a></li>
             <li><a href="/projects">Projects</a></li>
-           <li><a href="/profile">My Profile</a></li>
+           <li><a href="/student-profile">My Profile</a></li>
            
            
             <!-- Logout Form (POST method) -->
