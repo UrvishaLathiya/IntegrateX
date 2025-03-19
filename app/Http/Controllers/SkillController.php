@@ -34,42 +34,42 @@ class SkillController extends Controller
             'skills' => 'array',
             'sub_skills' => 'array',
         ]);
-
+    
         $studentId = session('student_id');
-
+    
         if (!$studentId) {
             return redirect()->route('login')->with('error', 'Please set a student first.');
         }
-
-        // Prevent duplicate entries by deleting old records
+    
+        // ✅ Prevent duplicate entries
         StudentSkill::where('student_id', $studentId)->delete();
-
-        // Save selected skills
+    
+        // ✅ Save selected skills
         if ($request->has('skills')) {
             foreach ($request->skills as $skillId) {
                 StudentSkill::create([
                     'student_id' => $studentId,
                     'skill_id' => $skillId,
-                    'skill_subset_id' => null,
+                    'skill_subset_id' => null, // ✅ Allow null subset
                 ]);
             }
         }
-
-        // Save selected sub-skills
+    
+        // ✅ Save selected sub-skills
         if ($request->has('sub_skills')) {
             foreach ($request->sub_skills as $subsetId) {
                 $skillId = Skill::whereHas('subsets', function ($query) use ($subsetId) {
                     $query->where('id', $subsetId);
                 })->value('id');
-
+    
                 StudentSkill::create([
                     'student_id' => $studentId,
-                    'skill_id' => $skillId,
+                    'skill_id' => $skillId ?? null, // ✅ Ensure skill_id exists
                     'skill_subset_id' => $subsetId,
                 ]);
             }
         }
-
+    
         return redirect()->back()->with('success', 'Skills saved successfully!');
     }
 }

@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Skill extends Model
 {
     use HasFactory;
-    protected $fillable = ['skill_name'];
+    protected $fillable = ['name'];
 
     public function subsets()
+{
+    return $this->hasMany(SkillSubset::class, 'skill_id');
+}
+
+    public function studentSkills()
     {
-        return $this->hasMany(SkillSubset::class, 'skill_id');
+        return $this->hasMany(StudentSkill::class);
     }
 }

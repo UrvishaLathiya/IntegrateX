@@ -39,12 +39,14 @@
 
 
         // Logout function
-        public function logout()
+        public function logout(Request $request)
         {
             // Log the user out
             Session::flush(); // This clears all session data
-            return redirect()->route('login')->with('success', 'Logged out successfully.');
+            return redirect(url('/login'))->with('success', 'Logged out successfully.');
+
         }
+        
        
     }
     

@@ -79,11 +79,11 @@
            
             <!-- Logout Form (POST method) -->
             <li>
-              <form action="{{ route('logout') }}" method="POST">
+              <form action="{{ route('student.logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-danger">Logout</button>
-              </form>
-            </li>
+                <button type="submit">Logout (Student)</button>
+            </form>
+          
           </ul>
         </div>
         <!-- /Navigation & Social buttons -->

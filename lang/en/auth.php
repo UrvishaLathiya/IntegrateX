@@ -1,20 +1,34 @@
 <?php
 
 return [
+    'defaults' => [
+        'guard' => 'placement_officer', // ✅ Set default guard
+        'passwords' => 'placement_officers',
+    ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+        'placement_officer' => [ // ✅ Define guard for Placement Officers
+            'driver' => 'session',
+            'provider' => 'placement_officers',
+        ],
+    ],
 
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'placement_officers' => [ // ✅ Define provider for placement_officers
+            'driver' => 'eloquent',
+            'model' => App\Models\PlacementOfficer::class,
+        ],
+    ],
 ];
+
+

@@ -64,4 +64,12 @@ class RegisterController extends Controller
     {
         return view('login');
     }
+    public function logout(Request $request)
+    {
+        $request->session()->forget('placement_id'); // Remove session
+        $request->session()->flush(); // Clear all session data
+        $request->session()->regenerateToken(); // Regenerate token for security
+
+        return redirect('/placement/login'); // Redirect to placement login
+    }
 }
