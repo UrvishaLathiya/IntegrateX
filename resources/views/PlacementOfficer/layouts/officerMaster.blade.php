@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Placemrnt Dashboard</title>   
+  <title>Placement Dashboard</title>   
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('officerAssets/css/vendors/feather/feather.css') }}">
   <link rel="stylesheet" href="{{ asset('officerAssets/css/vendors/ti-icons/css/themify-icons.css')}}">
@@ -18,6 +18,8 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('officerAssests/css/vertical-layout-light/style.css')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('officerAssests/images/favicon.png')}}" />
 </head>
@@ -26,9 +28,13 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.svg" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html">
-          <img src="{{ url('officerAssets/images/logo-mini.svg') }}" alt="Logo Mini">
+        <!-- Main Logo -->
+        <a class="navbar-brand brand-logo mr-5" href="index.html">
+          <img src="{{ asset('images/final.webp') }}" alt="Integratex Logo" width="50">
+        </a>
+          
+
+
 
         </a>
       </div>
@@ -44,45 +50,24 @@
                   <i class="icon-search"></i>
                 </span>
               </div>
-              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+              <div class="text-center w-100">
+                <input type="text" 
+                       class="form-control font-weight-bold text-center" 
+                       id="navbar-search-input" 
+                       placeholder="Placement Dashboard" 
+                       aria-label="placement-dashboard" 
+                       aria-describedby="search" 
+                       style="font-size: 20px; font-weight: bold; max-width: 300px; margin: 0 auto;">
+            </div>
             </div>
           </li>
         </ul>
-        <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-              <i class="icon-bell mx-0"></i>
-              <span class="count"></span>
-            </a>
+        
             
                 
               
               
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/faces/face28.jpg" alt="profile"/>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
-                <i class="ti-settings text-primary"></i>
-                Settings
-              </a>
-              <a class="dropdown-item">
-                <i class="ti-power-off text-primary"></i>
-                Logout
-              </a>
-            </div>
-          </li>
-          <li class="nav-item nav-settings d-none d-lg-flex">
-            <a class="nav-link" href="#">
-              <i class="icon-ellipsis"></i>
-            </a>
-          </li>
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-          <span class="icon-menu"></span>
-        </button>
-      </div>
+          
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
@@ -261,30 +246,29 @@
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="/index">
-              <i class="icon-grid menu-icon"></i>
+              <i class="fas fa-tachometer-alt menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link"  href="/showskill">
-              <i class="icon-layout menu-icon"></i>
+              <i class="fas fa-laptop-code menu-icon"></i>
               <span class="menu-title">Show Skill</span>
-              <i class="menu-arrow"></i>
             </a>
            
           <li class="nav-item">
             <a class="nav-link" href="/student-placement" >
-              <i class="icon-columns menu-icon"></i>
+              <i class="fas fa-chart-line menu-icon"></i>
               <span class="menu-title">Reporting</span>
-              <i class="menu-arrow"></i>
+              
             </a>
             
           </li>
           <li class="nav-item">
             <a class="nav-link"  href="/assign-skill" >
-              <i class="icon-bar-graph menu-icon"></i>
+              <i class="fas fa-tools menu-icon"></i>
               <span class="menu-title">Manage Skills</span>
-              <i class="menu-arrow"></i>
+              
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
@@ -294,9 +278,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/branches" >
-              <i class="icon-grid-2 menu-icon"></i>
+              <i class="fas fa-code-branch menu-icon"></i>
               <span class="menu-title">Branch</span>
-              <i class="menu-arrow"></i>
+             
             </a>
             <div class="collapse" id="tables">
               <ul class="nav flex-column sub-menu">
@@ -308,9 +292,9 @@
          
           <li class="nav-item">
             <a class="nav-link"  href="/profile" >
-              <i class="icon-ban menu-icon"></i>
+              <i class="fas fa-user-edit menu-icon"></i>
               <span class="menu-title">Update Profile</span>
-              <i class="menu-arrow"></i>
+              
             </a>
             <div class="collapse" id="error">
               <ul class="nav flex-column sub-menu">

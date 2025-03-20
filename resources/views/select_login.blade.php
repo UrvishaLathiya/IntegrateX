@@ -47,6 +47,17 @@
 </head>
 <body>
     <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid d-flex flex-column align-items-center">
+                <!-- Logo -->
+                <a class="navbar-brand mb-2" href="#">
+                    <img src="{{ asset('images/final.webp') }}" alt="Integratex Logo" width="80">
+                </a>
+        
+                <!-- Centered Text -->
+                
+            </div>
+        </nav>
         <h2 class="mb-4">Select Login Type</h2>
         <a href="{{ route('officerlogin') }}" class="btn btn-custom btn-officer">Officer Login</a>
         <a href="{{ route('login') }}" class="btn btn-custom btn-student">Student Login</a>
