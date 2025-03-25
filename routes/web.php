@@ -106,7 +106,7 @@ Route::get('/index', function () {
 Route::get('/showskill', [StudentMonitoringController::class, 'index'])->name('placement.showskill');
 
 Route::get('/student-placement', [StudentPlacementController::class, 'index'])->name('student.placement');
-
+Route::get('/student/placement/download', [StudentPlacementController::class, 'downloadPDF'])->name('student.placement.download');
 
 // ✅ Show skill management page
 // ✅ Show all skills & sub-skills

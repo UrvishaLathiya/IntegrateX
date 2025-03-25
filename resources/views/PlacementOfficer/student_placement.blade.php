@@ -73,6 +73,18 @@
             </tbody>
         </table>
     </div>
+    <div class="d-flex justify-content-end mb-3">
+        <form action="{{ route('student.placement.download') }}" method="GET">
+            <input type="hidden" name="year" value="{{ request('year') }}">
+            <input type="hidden" name="branch_id" value="{{ request('branch_id') }}">
+            <input type="hidden" name="skill_id" value="{{ request('skill_id') }}">
+            <button type="submit" class="btn btn-danger">
+                ⬇️ Download PDF
+            </button>
+        </form>
+    </div>
+    
+    
 </div>
 
 <!-- Bootstrap CSS -->
