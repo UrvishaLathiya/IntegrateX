@@ -10,6 +10,11 @@ class PlacementOfficer extends Authenticatable
 
     protected $fillable = ['officer_name', 'email', 'phone', 'role', 'password'];
 
-   
-    
+    protected $table = 'placement_officers';  
+      
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'placement_officer_id');
+    }
+
 }

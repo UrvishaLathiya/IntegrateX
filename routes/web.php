@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\AddAdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PageController;
@@ -11,10 +13,6 @@ use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Session;
 
 
-
-
-
-
 use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\StudentMonitoringController;
 use App\Http\Controllers\StudentPlacementController;
@@ -23,7 +21,16 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\OfficerProfileController;
 
 
+use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\ShowProfessersController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\BackupController;
 
+
+use App\Http\Controllers\RecruiterLoginController;
+use App\Http\Controllers\RecruiterRegisterController;
+use App\Http\Controllers\RecruiterStudentOfficerController;
+use App\Http\Controllers\RecruitmentController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -88,12 +95,19 @@ Route::post('/officerregister', [OfficerController::class, 'register'])->name('o
 // Login Routes
 Route::get('/officerlogin', [OfficerController::class, 'showLoginForm'])->name('officerlogin');
 Route::post('/officerlogin', [OfficerController::class, 'login'])->name('officerlogin.post');
+
     
 Route::get('/placement/logout', function () {
     Session::forget('placement_logged_in');
     return redirect('/placement/login');
 })->name('placement.logout');
 Route::post('/placement/logout', [OfficerController::class, 'logout'])->name('placement.logout');
+
+Route::get('/placement/notifications', [OfficerController::class, 'showNotifications'])->name('notifications');
+Route::get('/placement/notifications/read/{id}', [OfficerController::class, 'markAsRead'])->name('markAsRead');
+Route::get('/notifications/unread-count', [OfficerController::class, 'getUnreadCount'])->name('getUnreadCount');
+
+
 
 // Dummy Dashboard Route (To test login session)
 Route::get('/index', function () {
@@ -133,3 +147,77 @@ Route::get('/profile', [OfficerProfileController::class, 'edit'])->name('officer
 
 // ✅ Update profile (POST)
 Route::post('/profile/update', [OfficerProfileController::class, 'update'])->name('officer.profile.update');
+
+
+
+
+//admin
+
+Route::get('/admin', function () {
+    return view('Admin.adminLogin');
+})->name('adminLogin');
+
+
+Route::get('/adminLogin', [AdminLoginController::class, 'showLogin'])->name('adminLogin');
+Route::get('/adminIndex', [AdminLoginController::class, 'adminIndex'])->name('adminIndex');
+Route::post('/adminLogin', [AdminLoginController::class, 'login']);
+Route::get('/adminLogout', [AdminLoginController::class, 'logout'])->name('adminLogout');
+
+
+Route::get('/addNew', [AddAdminController::class, 'showAddAdmin'])->name('admin.addNew');  
+Route::post('/addNew', [AddAdminController::class, 'storeAdmin'])->name('admin.store');
+
+Route::get('/placement-officers', [ShowProfessersController::class, 'showOfficers'])->name('showOfficers');
+Route::post('/placement-officers', [ShowProfessersController::class, 'register'])->name('officers.add');
+Route::get('/placement-officers/search', [ShowProfessersController::class, 'searchOfficers'])->name('officers.search');
+Route::delete('/officers/{id}', [ShowProfessersController::class, 'deleteOfficer'])->name('officers.delete');
+
+
+Route::get('/students', [StudentController::class, 'showStudents'])->name('students.show');
+Route::post('/students/add', [StudentController::class, 'register'])->name('students.add');
+Route::get('/students/search', [StudentController::class, 'searchStudents'])->name('students.search');
+Route::get('/students/filter', [StudentController::class, 'filterStudents'])->name('students.filter');
+
+
+Route::get('/admin/branches', [BranchController::class, 'showBranchesForAdmin'])->name('admin.branches.show');
+Route::post('/admin/branches/add', [BranchController::class, 'store'])->name('admin.branches.add');
+
+
+
+Route::get('/admin/logout', function () {
+    session()->forget('admin'); // Remove the admin session
+    return redirect()->route('adminLogin'); // Redirect to the login page
+})->name('adminLogout');
+
+Route::get('/admin/backup', [BackupController::class, 'downloadBackup'])->name('admin.backup');
+
+
+
+
+
+
+
+
+
+//recruiter
+Route::get('/recruiter', function () {
+    return view('IndustryProfessionalModule.recruiterLogin');
+})->name('recruiterLogin');
+
+Route::get('/recruiter/login', [RecruiterLoginController::class, 'showLoginForm'])->name('recruiter.login');
+Route::post('/recruiter/login', [RecruiterLoginController::class, 'login'])->name('recruiter.login.submit');
+Route::post('/recruiter/logout', [RecruiterLoginController::class, 'logout'])->name('recruiter.logout');
+Route::get('/recruiter/index', [RecruiterLoginController::class, 'indexPage'])->name('recruiter.index');
+
+Route::get('/recruiter/register', [RecruiterRegisterController::class, 'showRegisterForm'])->name('recruiter.register');
+Route::post('/recruiter/register', [RecruiterRegisterController::class, 'register'])->name('recruiter.register.submit');
+
+// Route to show all placement officers
+Route::get('/recruiter/officers', [RecruiterStudentOfficerController::class, 'showOfficers'])->name('recruiter.officers');
+
+// Route to show all students
+Route::get('/recruiter/students', [RecruiterStudentOfficerController::class, 'showStudents'])->name('recruiter.students');
+
+Route::middleware(['auth:recruiter'])->group(function () {
+    Route::post('/send-recruitment-alert', [RecruitmentController::class, 'sendRecruitmentAlert'])->name('send.recruitment.alert');
+});

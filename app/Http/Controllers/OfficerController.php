@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PlacementOfficer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use App\Models\Notification;
 
 class OfficerController extends Controller
 {
@@ -33,6 +34,11 @@ class OfficerController extends Controller
             'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
+
+        // Check if the request is AJAX
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
 
         return redirect()->route('officerlogin')->with('success', 'Registration successful. Please log in.');
     }
@@ -83,5 +89,55 @@ class OfficerController extends Controller
     {
         Session::flush();
         return redirect()->route('officerlogin')->with('success', 'Logged out successfully.');
+    }
+
+    // Show all notifications for the logged-in Placement Officer
+    public function showNotifications()
+    {
+        $officerId = session('officer_id'); 
+
+        if (!$officerId) {
+            return redirect()->route('officerlogin')->with('error', 'Please log in first.');
+        }
+
+        $notifications = Notification::where('placement_officer_id', $officerId)
+                                     ->latest()
+                                     ->get();
+
+        return view('PlacementOfficer.notifications', compact('notifications'));
+    }
+
+    // Mark a notification as read
+    public function markAsRead($id)
+    {
+        $officerId = session('officer_id');
+
+        if (!$officerId) {
+            return redirect()->route('officerlogin')->with('error', 'Please log in first.');
+        }
+
+        $notification = Notification::where('id', $id)
+                                    ->where('placement_officer_id', $officerId)
+                                    ->firstOrFail();
+
+        $notification->update(['is_read' => true]);
+
+        return response()->json(['success' => true]);
+    }
+
+    // Get the unread notification count dynamically
+    public function getUnreadCount()
+    {
+        $officerId = session('officer_id');
+
+        if (!$officerId) {
+            return response()->json(['unreadCount' => 0]);
+        }
+
+        $unreadCount = Notification::where('placement_officer_id', $officerId)
+                                   ->where('is_read', false)
+                                   ->count();
+
+        return response()->json(['unreadCount' => $unreadCount]);
     }
 }

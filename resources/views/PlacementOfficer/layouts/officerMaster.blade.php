@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{ asset('officerAssests/images/favicon.png')}}" />
+  <link rel="shortcut icon" href="{{ asset('images/final.webp')}}" />
 </head>
 <body>
   <div class="container-scroller">
@@ -251,6 +251,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ route('notifications') }}" class="nav-link">
+                <i class="fas fa-bell menu-icon"></i>  <!-- 🔔 Notification Icon -->
+                <span class="menu-title">Notifications</span>
+                <span id="notificationCount" class="badge bg-danger text-white">0</span>
+            </a>
+        </li>
+        
+          <li class="nav-item">
             <a class="nav-link"  href="/showskill">
               <i class="fas fa-laptop-code menu-icon"></i>
               <span class="menu-title">Show Skill</span>
@@ -270,23 +278,12 @@
               <span class="menu-title">Manage Skills</span>
               
             </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
-              </ul>
-            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/branches" >
               <i class="fas fa-code-branch menu-icon"></i>
               <span class="menu-title">Branch</span>
-             
             </a>
-            <div class="collapse" id="tables">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/officerprofile">Basic table</a></li>
-              </ul>
-            </div>
           </li>
           
          
@@ -355,6 +352,29 @@
   <script src="js/dashboard.js"></script>
   <script src="js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
+  <a href="{{ route('notifications') }}" class="nav-link">
+    Notifications <span id="notificationCount" class="badge bg-danger">0</span>
+</a>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function fetchUnreadCount() {
+        $.ajax({
+            url: "{{ route('getUnreadCount') }}",
+            method: "GET",
+            success: function (data) {
+                $("#notificationCount").text(data.unreadCount);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        fetchUnreadCount();
+
+        setInterval(fetchUnreadCount, 10000); // Refresh every 10 seconds
+    });
+</script>
+
 </body>
 
 </html>

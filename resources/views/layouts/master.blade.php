@@ -10,6 +10,7 @@
     <meta name="author" content="lmtheme" />
     <link rel="shortcut icon" href="favicon.ico">
 
+    <link rel="shortcut icon" href="{{ asset('images/final.webp')}}" />
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/transition-animations.css">
@@ -69,7 +70,6 @@
           <ul id="nav" class="site-main-menu">
             <li><a href="/home" data-animation="58" data-goto="1">Home</a></li>
             <li><a href="/about" >About me</a></li>
-            <li><a href="/resume">Resume</a></li>
             <li><a href="/github" data-animation="61" data-goto="4">GitHub</a></li>
             <li><a href="/skill" data-animation="58" data-goto="5">Skill</a></li>
             <li><a href="/contact" data-animation="59" data-goto="6">Contact</a></li>

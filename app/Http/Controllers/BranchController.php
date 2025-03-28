@@ -14,18 +14,24 @@ class BranchController extends Controller
         return view('placementofficer.branches', compact('branches'));
     }
 
+    public function showBranchesForAdmin()
+    {
+        $branches = Branch::all();
+        return view('Admin.showBranches', compact('branches'));
+    }
     // ✅ Store a new branch
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|unique:branches,branch_name',
-        ]);
+{
+    $request->validate([
+        'branch_name' => 'required|unique:branches,branch_name',
+    ]);
 
-        $branch = new Branch();
-        $branch->branch_name = $request->name; // Ensure this matches the DB column
-        $branch->save();
+    $branch = new Branch();
+    $branch->branch_name = $request->branch_name; // Match input name
+    $branch->save();
 
-        return redirect()->back()->with('success', 'Branch added successfully!');
-    }
+    return response()->json(['success' => true, 'branch' => $branch]);
+}
+
 }
 
