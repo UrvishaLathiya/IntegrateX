@@ -144,6 +144,15 @@
                 }
             });
         });
+
+        // Search functionality
+        $("#searchOfficer").on("keyup", function() {
+            let value = $(this).val().toLowerCase();
+            $("#officerTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
     });
 </script>
+
 @endsection

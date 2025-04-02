@@ -31,6 +31,7 @@ use App\Http\Controllers\RecruiterLoginController;
 use App\Http\Controllers\RecruiterRegisterController;
 use App\Http\Controllers\RecruiterStudentOfficerController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\RecruiterBranchController;
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -217,6 +218,14 @@ Route::get('/recruiter/officers', [RecruiterStudentOfficerController::class, 'sh
 
 // Route to show all students
 Route::get('/recruiter/students', [RecruiterStudentOfficerController::class, 'showStudents'])->name('recruiter.students');
+
+
+Route::get('/recruiter/branches', [RecruiterBranchController::class, 'index'])
+    ->name('recruiter.branches.show');
+
+Route::post('/recruiter/branches/add', [RecruiterBranchController::class, 'store'])
+    ->name('recruiter.branches.add');
+
 
 Route::middleware(['auth:recruiter'])->group(function () {
     Route::post('/send-recruitment-alert', [RecruitmentController::class, 'sendRecruitmentAlert'])->name('send.recruitment.alert');

@@ -90,6 +90,7 @@
 <!-- AJAX Search Script -->
 <script>
     $(document).ready(function () {
+        // Add Placement Officer via AJAX
         $('#addProfessorForm').submit(function (event) {
             event.preventDefault(); // Prevent normal form submission
     
@@ -112,35 +113,45 @@
                 }
             });
         });
-    });
 
+        // Delete Placement Officer via AJAX
+        $(document).on('click', '.delete-officer', function() {
+            let officerId = $(this).data('id');
 
-    $(document).on('click', '.delete-officer', function() {
-        let officerId = $(this).data('id');
-
-        if (confirm('Are you sure you want to delete this officer?')) {
-            $.ajax({
-                url: "{{ route('officers.delete', '') }}/" + officerId,
-                type: "POST", // Laravel doesn't accept DELETE directly in form requests
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    _method: "DELETE" // Explicitly send DELETE method
-                },
-                success: function(response) {
-                    if (response.success) {
-                        alert(response.message);
-                        $("#officerRow" + officerId).remove(); // Remove row from table
-                    } else {
-                        alert("Error: " + response.message);
+            if (confirm('Are you sure you want to delete this officer?')) {
+                $.ajax({
+                    url: "{{ route('officers.delete', '') }}/" + officerId,
+                    type: "POST", // Laravel doesn't accept DELETE directly in form requests
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        _method: "DELETE" // Explicitly send DELETE method
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.message);
+                            $("#officerRow" + officerId).remove(); // Remove row from table
+                        } else {
+                            alert("Error: " + response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert("An error occurred: " + xhr.responseJSON.message);
                     }
-                },
-                error: function(xhr) {
-                    alert("An error occurred: " + xhr.responseJSON.message);
-                }
-            });
+                });
+            }
+        });
 
-        }});
-    </script>
+        // **Search Functionality**
+        $("#searchOfficer").on("keyup", function() {
+            let value = $(this).val().toLowerCase();
+            $("#officerTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+
+    });
+</script>
+
     
 
 @endsection
